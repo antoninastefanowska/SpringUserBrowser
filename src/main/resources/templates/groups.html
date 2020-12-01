@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Grupy</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="/webjars/font-awesome/5.15.1/css/all.min.css" />
+</head>
+    <body>
+    <div th:switch="${groups}" class="container my-1 d-flex justify-content-center">
+        <div class="row">
+            <div class="embed-responsive">
+                <h2 th:case="null">Brak grup.</h2>
+                <div th:case="*">
+                    <h2 class="my-5">Grupy</h2>
+                    <table class="table table-striped table-responsive-md">
+                        <thead>
+                        <tr>
+                            <th>Nazwa grupy</th>
+                            <th></th>
+                            <th></th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="group : ${groups}">
+                            <td th:text="${group.name}"></td>
+                            <td><a th:href="@{/groups/{groupname}(groupname=${group.name})}" class="btn btn-primary">Wyświetl</a></td>
+                            <td><a th:href="@{/groups/delete/{groupname}(groupname=${group.name})}" class="btn btn-primary">Usuń</a></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+                <p class="my-10 d-flex justify-content-end">
+                    <a href="/groups/create" class="btn btn-primary">
+                        Dodaj grupę <i class="fas fa-users ml-2"></i>
+                    </a>
+                </p>
+            </div>
+        </div>
+    </div>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</body>
+</html>

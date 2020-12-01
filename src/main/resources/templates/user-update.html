@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Edytuj użytkownika</title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container my-1 d-flex justify-content-center">
+        <div class="row">
+            <div class="embed-responsive">
+                <h2>Edytuj użytkownika</h2>
+                <form action="#" th:action="@{/users/update/{username}(username=${user.username})}" th:object="${user}" method="post">
+                    <div class="form-group col-md-20">
+                        <label for="new-password" class="col-form-label">Hasło</label>
+                        <input type="password" th:field="*{password}" class="form-control" id="new-password" />
+                        <span th:if="${#fields.hasErrors('password')}" th:errors="*{password}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-20">
+                        <label for="name" class="col-form-label">Imię</label>
+                        <input type="text" th:field="*{name}" class="form-control" id="name" placeholder="Imię" />
+                        <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-20">
+                        <label for="email" class="col-form-label">Adres e-mail</label>
+                        <input type="email" th:field="*{email}" class="form-control" id="email" placeholder="Adres e-mail" />
+                        <span th:if="${#fields.hasErrors('email')}" th:errors="*{email}" class="text-danger"></span>
+                    </div>
+                    <div class="form-group col-md-20">
+                        <label for="groups" class="col-form-label">Grupy</label>
+                        <div id="groups">
+                            <div th:each="group : ${groups}" class="form-check">
+                                <label class="form-check-label" th:inline="text">
+                                    <input type="checkbox" class="form-check-input" name="group-names" th:value="${group.name}" th:checked="${user.inGroup(group)}">
+                                    [[${group.name}]]
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="my-10 d-flex justify-content-end">
+                        <input type="submit" class="btn btn-primary" value="Zatwierdź">
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</body>
+</html>

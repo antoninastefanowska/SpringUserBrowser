@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${user.username}"></title>
+    <link rel="stylesheet" href="/webjars/bootstrap/4.5.3/css/bootstrap.min.css" />
+</head>
+<body>
+    <div class="container my-1 d-flex justify-content-center">
+        <div class="row">
+            <div class="embed-responsive">
+                <h2 class="my-5">Użytkownik</h2>
+                <table class="table table-striped table-responsive-md">
+                    <thead>
+                        <tr>
+                            <th>Nazwa pola</th>
+                            <th>Wartość</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Nazwa użytkownika</td>
+                            <td th:text="${user.username}"></td>
+                        </tr>
+                        <tr>
+                            <td>Hasło</td>
+                            <td th:text="${user.password}"></td>
+                        </tr>
+                        <tr>
+                            <td>Imię</td>
+                            <td th:text="${user.name}"></td>
+                        </tr>
+                        <tr>
+                            <td>Adres e-mail</td>
+                            <td th:text="${user.email}"></td>
+                        </tr>
+                        <tr>
+                            <td>Grupy</td>
+                            <td>
+                                <p th:if="${user.groups.isEmpty()}">Brak</p>
+                                <ul th:unless="${user.groups.isEmpty()}" class="list-group list-group-flush">
+                                    <li class="list-group-item" th:each="group : ${user.groups}" th:text="${group.name}"></li>
+                                </ul>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <script src="/webjars/jquery/3.5.1/jquery.min.js"></script>
+    <script src="/webjars/bootstrap/4.5.3/js/bootstrap.min.js"></script>
+</body>
+</html>
